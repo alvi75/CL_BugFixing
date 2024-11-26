@@ -31,7 +31,7 @@ plt.text(2, 82, "Combination benefits", fontsize=10, color="red", ha="center")
 
 plt.legend(loc="upper left", fontsize=10)
 
-plt.title("BLEU Scores for Different Datasets with Annotations", fontsize=16)
+plt.title("BLEU Scores for Small, Medium, and Combined Datasets during Progressive Curriculum Learning with Key Observations Highlighted", fontsize=10)
 plt.xlabel("Dataset", fontsize=14)
 plt.ylabel("BLEU Score (%)", fontsize=14)
 plt.ylim(0, 100)
