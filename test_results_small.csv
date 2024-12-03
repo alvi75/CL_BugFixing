@@ -1,0 +1,25 @@
+Buggy Code,Predicted Fixed Code
+"
+        public int divide(int a, int b) {
+            if (b == 0) {
+                return -1;
+            }
+            return a / b;
+        }
+        ","public int divide ( int a , int b ) { return a / b ; } 
+"
+"
+        public int add(int a, int b) {
+            return a - b; // Incorrect logic
+        }
+        ","public int add ( int a , int b ) { return a + b ; } 
+"
+"
+        public int max(int a, int b) {
+            if (a > b) {
+                return b; // Incorrect return
+            }
+            return a;
+        }
+        ","public int max ( int a , int b ) { return a > b ? a : b ; } 
+"
