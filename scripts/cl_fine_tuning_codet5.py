@@ -34,12 +34,12 @@ def fine_tune_model(dataset, output_dir, tokenizer, model, lambda_value=1.0, epo
     # Training arguments
     training_args = TrainingArguments(
         output_dir=output_dir,
-        evaluation_strategy="epoch",
-        save_strategy="epoch",
+        evaluation_strategy="epoch",  # Match with save_strategy
+        save_strategy="epoch",  # Match with evaluation_strategy
         learning_rate=5e-5,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
-        gradient_accumulation_steps=8,
+        per_device_train_batch_size=2,
+        per_device_eval_batch_size=2,
+        gradient_accumulation_steps=16,
         num_train_epochs=epochs,
         weight_decay=0.01,
         logging_dir='./logs',
@@ -49,7 +49,9 @@ def fine_tune_model(dataset, output_dir, tokenizer, model, lambda_value=1.0, epo
         metric_for_best_model="eval_loss",  # Choose validation loss as metric
         greater_is_better=False,  # Lower validation loss is better
         fp16=True,  # Mixed precision
+        eval_accumulation_steps=4,  # Reduce memory usage during evaluation
     )
+
 
     trainer = Trainer(
         model=model,
@@ -89,7 +91,7 @@ for dataset_name, batches in datasets.items():
     print(f"Starting Curriculum Learning for {dataset_name} dataset...")
     for i, batch_file in enumerate(batches, start=1):
         print(f"Fine-tuning on {dataset_name} batch {i}: {batch_file}")
-        output_dir = os.path.join("/home/ygong07/CL_BugFixing/models", f"{dataset_name}_batch_{i}")
+        output_dir = os.path.join("models", f"{dataset_name}_batch_{i}")
         os.makedirs(output_dir, exist_ok=True)
 
         # Load dataset
